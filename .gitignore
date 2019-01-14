@@ -1,0 +1,7 @@
+.DS_Store
+
+# Ignore the generated files
+/server/server
+/client/client
+/operator/operator
+
