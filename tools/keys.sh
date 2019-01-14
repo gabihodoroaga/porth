@@ -9,7 +9,7 @@ openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -subj '/CN=port
 
 openssl genrsa -out server.key 2048
 openssl req -new -key server.key -subj '/CN=porth Server/O=hodo.ro/C=RO' -out server.csr
-openssl x509 -req -extfile <(printf "subjectAltName=DNS:localhost,DNS:www.example.com") -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 365 -sha256
+openssl x509 -req -extfile <(printf "subjectAltName=DNS:localhost,DNS:porth.hodo.ro") -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 365 -sha256
 
 # Generate client certificate
 

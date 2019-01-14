@@ -88,7 +88,7 @@ func parseArgs() {
 	logFile := flag.String("log-file", "", "Full log file path")
 	logConsole := flag.Bool("log-console", true, "Send logs to console")
 	logLevel := flag.String("log-level", "TRACE", "Set the file log level")
-	httpAddr := flag.String("http-addr", ":8084", "http server addredd")
+	httpAddr := flag.String("http-addr", ":2672", "http server addredd")
 	flag.Parse()
 	config = Config{
 		serverAddr: *serverAddr,
