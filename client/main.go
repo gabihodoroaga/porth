@@ -6,6 +6,7 @@ import (
 	"errors"
 	"flag"
 	"io"
+	"math/rand"
 	"net"
 	"os"
 	"os/signal"
@@ -120,6 +121,45 @@ func main() {
 	session.Close()
 }
 
+func parseArgs() {
+	serverAddr := flag.String("server", "", "Server address")
+	localAddr := flag.String("local", "", "local address")
+	tunnelId := flag.String("id", "", "the id of the tunnel")
+	logFile := flag.String("log-file", "", "Full log file path")
+	logConsole := flag.Bool("log-console", true, "Send logs to console")
+	logLevel := flag.String("log-level", "TRACE", "Set the file log level")
+	flag.Parse()
+
+	if *serverAddr == "" || *localAddr == "" {
+		flag.Usage()
+		os.Exit(1)
+		return
+	}
+	// autogenerate the tunnelId if not provided
+	if *tunnelId == "" {
+		*tunnelId = generateTunnelId(10)
+	}
+
+	config = Config{
+		serverAddr: *serverAddr,
+		localAddr:  *localAddr,
+		tunnelId:   *tunnelId,
+		logFile:    *logFile,
+		logConsole: *logConsole,
+		logLevel:   *logLevel,
+	}
+}
+
+func generateTunnelId(n int) string {
+	rand.Seed(time.Now().UnixNano())
+	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = letters[rand.Intn(len(letters))]
+	}
+	return string(b)
+}
+
 func initLogger() {
 	var logger = lumber.NewMultiLogger()
 
@@ -138,24 +178,6 @@ func initLogger() {
 	}
 
 	log = logger
-}
-
-func parseArgs() {
-	serverAddr := flag.String("server", "", "Server address")
-	localAddr := flag.String("local", "", "local address")
-	tunnelId := flag.String("id", "", "the id of the tunnel")
-	logFile := flag.String("log-file", "", "Full log file path")
-	logConsole := flag.Bool("log-console", true, "Send logs to console")
-	logLevel := flag.String("log-level", "TRACE", "Set the file log level")
-	flag.Parse()
-	config = Config{
-		serverAddr: *serverAddr,
-		localAddr:  *localAddr,
-		tunnelId:   *tunnelId,
-		logFile:    *logFile,
-		logConsole: *logConsole,
-		logLevel:   *logLevel,
-	}
 }
 
 func getTlsConfig() (*tls.Config, error) {
