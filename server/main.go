@@ -223,7 +223,7 @@ func handleClient(conn net.Conn, tunnel_id string) {
 		return
 	}
 
-	// open stream here dows not return error if the connection is broken
+	// open stream here does not return error if the connection is broken
 	// it olny checks if the config is ok and the maximum number of streams is reached
 	control_client_stream, err := client_session.Open()
 	if err != nil {

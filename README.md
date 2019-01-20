@@ -1,12 +1,15 @@
 # porth
 A simple secure tcp port redirector.
 
+The idea is simple:
+Let’s say that you want to access the database of a client from your laptop and you don’t have access to the client’s router/firewall and also you are in a network where you cannot control the router/firewall. The only option is that the client connects to an external server, and you connect to an external server too and let the server to transfer the packets between you and client. Using porth you can achieve this.
 
 Features
 =====
 
-- use one server port for both client and operator connections
-- use client certificates for authentication
+- use client certificates
+- use one server port for all clients and operators
+- connect multiple operators to one client
 
 Build
 =====
@@ -40,7 +43,7 @@ Start the server on default port 2671.
     
 Redirect port 7000 on client host.
 
-    ./client/client -server=localhost:2671 -local=:7000 -id=testid
+    ./client/client -server=localhost:2671 -local=localhost:7000 -id=testid
 
 Redirect port 7001 on operator host using the same id.
 
