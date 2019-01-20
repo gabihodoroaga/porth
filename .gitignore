@@ -2,6 +2,9 @@
 
 # Ignore the generated files
 /server/server
+/server/server.exe
 /client/client
+/client/client.exe
 /operator/operator
+/operator/operator.exe
 
