@@ -1,4 +1,6 @@
 .DS_Store
+# Ignore bin foolder
+/bin
 
 # Ignore the generated files
 /server/server
