@@ -3,7 +3,7 @@ A simple secure tcp port redirector.
 
 The idea is simple:
 
-Let’s say you want to access the database of a client from your laptop and you don’t have access to the client’s router/firewall and also you are in a network where you cannot control the router/firewall. The only option is: client connects to an external server, you connect to the same server and tell the server to transfer the packets between you and client. Using porth you can achieve this.
+Let’s say you want to access the database of a client from your laptop and you don’t have access to the client’s router/firewall and also you are in a network where you cannot control the router/firewall. One option would be if the client connects to an external server and you connect to the same server and also tell the server to transfer the packets from one connection to another. Using porth you can achieve this.
 
 ![Alt text](docs/porth.png?raw=true "porth")
 
